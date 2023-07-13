@@ -6,17 +6,20 @@
 </head>
 <body>
   <div class="music-player">
-    <h1>Venti's Concert</h1>
-    <audio id="musicPlayer" src="https://thetrueheavensequal.github.io/file/Impact.mp3"></audio>
-
-    <div class="music-player-buttons">
-      <button onclick="playMusic()">Play</button>
-      <button onclick="pauseMusic()">Pause</button>
-      <button onclick="stopMusic()">Stop</button>
+    <div class="player-wrapper">
+      <div class="player">
+        <audio id="musicPlayer" src="https://thetrueheavensequal.github.io/file/Impact.mp3"></audio>
+        <div class="player-controls">
+          <button class="play-button" onclick="playMusic()"><span></span></button>
+          <button class="pause-button" onclick="pauseMusic()"><span></span></button>
+          <button class="stop-button" onclick="stopMusic()"><span></span></button>
+        </div>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-bar-inner"></div>
+      </div>
     </div>
-
-    <div class="music-player-animation"></div>
-
+    <h1>Venti's Concert</h1>
     <script src="script.js"></script>
   </div>
 </body>
