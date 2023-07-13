@@ -10,44 +10,95 @@ body {
   margin-top: 100px;
 }
 
-.music-player h1 {
-  font-family: Arial, sans-serif;
-  color: #333333;
-  text-align: center;
+.player-wrapper {
+  width: 320px;
+  background-color: #1DB954;
+  border-radius: 20px;
+  padding: 20px;
 }
 
-.music-player-buttons {
-  margin-top: 20px;
+.player {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.music-player-buttons button {
-  background-color: #4CAF50;
+.player-controls button {
+  background-color: transparent;
   border: none;
-  color: white;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
   cursor: pointer;
-  border-radius: 4px;
 }
 
-#musicPlayer {
-  display: none;
+.play-button span::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background-color: #FFFFFF;
+  transition: width 0.3s;
 }
 
-.music-player-animation {
-  width: 100px;
-  height: 100px;
-  background-color: #4CAF50;
+.play-button span::after {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 14px;
+  width: 0;
+  height: 8px;
+  background-color: #FFFFFF;
+  transition: width 0.3s;
+}
+
+.play-button:hover span::before {
+  width: 100%;
+}
+
+.play-button:hover span::after {
+  width: 24px;
+}
+
+.pause-button span::before,
+.pause-button span::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 100%;
+  background-color: #FFFFFF;
+}
+
+.pause-button span::before {
+  transform: translateX(6px);
+}
+
+.pause-button span::after {
+  transform: translateX(-6px);
+}
+
+.stop-button span {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  background-color: #FFFFFF;
   border-radius: 50%;
-  animation: spin 2s linear infinite;
-  margin-top: 30px;
 }
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+.progress-bar {
+  height: 4px;
+  background-color: #888888;
+  margin-top: 12px;
+}
+
+.progress-bar-inner {
+  height: 100%;
+  width: 0;
+  background-color: #FFFFFF;
+  transition: width 0.3s;
+  border-radius: 2px;
 }
