@@ -8,10 +8,10 @@
       margin: 0;
       padding: 0;
       font-family: 'Nanum Brush Script', Arial, sans-serif;
-      background-image: linear-gradient(90deg, #4c6cb7, #c53f82);
-      background-size: 200% auto;
-      background-position: 0 50%;
-      animation: flow 4s linear infinite;
+      background-image: url("https://raw.githubusercontent.com/thetrueheavensequal/file/main/background.jpg");
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
     }
 
     #container {
@@ -37,22 +37,25 @@
 
     .audio-player {
       position: relative;
-      z-index: 1;
       width: 220px;
       height: 80px;
-      background-color: rgba(255, 255, 255, 0.5);
+      background-image: linear-gradient(90deg, #4c6cb7, #c53f82);
+      background-size: 200% auto;
+      background-position: 0 50%;
       border-radius: 40px;
       display: flex;
       align-items: center;
       justify-content: center;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      animation: flow 4s linear infinite;
     }
 
     .audio-player audio {
       display: none;
     }
 
-    .audio-player__play-btn {
+    .audio-player__play-btn,
+    .audio-player__pause-btn {
       width: 40px;
       height: 40px;
       background-color: #fff;
@@ -65,40 +68,59 @@
       transition: background-color 0.3s ease;
     }
 
-    .audio-player__play-btn:hover {
+    .audio-player__play-btn:hover,
+    .audio-player__pause-btn:hover {
       background-color: #f2f2f2;
     }
 
-    .audio-player__play-btn::before {
+    .audio-player__play-btn::before,
+    .audio-player__pause-btn::before {
       content: "";
       width: 0;
       height: 0;
       border-top: 10px solid transparent;
       border-bottom: 10px solid transparent;
-      border-left: 16px solid #4c6cb7;
+      border-left: 16px solid #fff;
       transition: border-left 0.3s ease;
     }
 
-    .audio-player__play-btn:hover::before {
-      border-left: 16px solid #3d5599;
+    .audio-player__play-btn:hover::before,
+    .audio-player__pause-btn:hover::before {
+      border-left: 16px solid #e2e2e2;
     }
 
     .audio-player__play-btn.playing::before {
       border-left: none;
       border-top: 16px solid transparent;
       border-bottom: 16px solid transparent;
-      border-right: 12px solid #3d5599;
+      border-right: 12px solid #e2e2e2;
     }
 
-    @keyframes flow {
+    .audio-player__pause-btn.paused::before {
+      width: 8px;
+      height: 20px;
+      background-color: #e2e2e2;
+    }
+
+    .progress-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background-color: goldenrod;
+      animation: progress-glow 2s linear infinite;
+    }
+
+    @keyframes progress-glow {
       0% {
-        background-position: 0 50%;
+        box-shadow: 0 0 5px 2px goldenrod;
       }
       50% {
-        background-position: 100% 50%;
+        box-shadow: 0 0 10px 4px goldenrod;
       }
       100% {
-        background-position: 0 50%;
+        box-shadow: 0 0 5px 2px goldenrod;
       }
     }
   </style>
@@ -111,21 +133,32 @@
     <div class="audio-player">
       <audio id="audio" src="https://thetrueheavensequal.github.io/file/Impact.mp3"></audio>
       <div class="audio-player__play-btn" id="playBtn"></div>
+      <div class="audio-player__pause-btn" id="pauseBtn"></div>
     </div>
   </div>
+  <div class="progress-bar"></div>
 
   <script>
     const playBtn = document.getElementById('playBtn');
+    const pauseBtn = document.getElementById('pauseBtn');
     const audio = document.getElementById('audio');
+    const progressBar = document.querySelector('.progress-bar');
 
     playBtn.addEventListener('click', () => {
-      if (audio.paused) {
-        audio.play();
-        playBtn.classList.add('playing');
-      } else {
-        audio.pause();
-        playBtn.classList.remove('playing');
-      }
+      audio.play();
+      playBtn.classList.add('playing');
+      pauseBtn.classList.remove('paused');
+    });
+
+    pauseBtn.addEventListener('click', () => {
+      audio.pause();
+      pauseBtn.classList.add('paused');
+      playBtn.classList.remove('playing');
+    });
+
+    audio.addEventListener('timeupdate', () => {
+      const progress = (audio.currentTime / audio.duration) * 100;
+      progressBar.style.width = `${progress}%`;
     });
   </script>
 </body>
