@@ -12,6 +12,7 @@
       background-size: cover;
       background-position: center center;
       background-repeat: no-repeat;
+      position: relative;
     }
 
     #container {
@@ -19,7 +20,8 @@
       height: 100vh;
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-end;
+      padding-right: 20px;
     }
 
     h1 {
@@ -28,6 +30,7 @@
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
       color: white;
       animation: fadein 2s;
+      margin-right: 40px;
     }
 
     @keyframes fadein {
@@ -54,8 +57,7 @@
       display: none;
     }
 
-    .audio-player__play-btn,
-    .audio-player__pause-btn {
+    .audio-player__btn {
       width: 40px;
       height: 40px;
       background-color: #fff;
@@ -68,38 +70,27 @@
       transition: background-color 0.3s ease;
     }
 
-    .audio-player__play-btn:hover,
-    .audio-player__pause-btn:hover {
+    .audio-player__btn:hover {
       background-color: #f2f2f2;
     }
 
-    .audio-player__play-btn::before,
-    .audio-player__pause-btn::before {
+    .audio-player__btn::before {
       content: "";
       width: 0;
       height: 0;
       border-top: 10px solid transparent;
       border-bottom: 10px solid transparent;
-      border-left: 16px solid #fff;
       transition: border-left 0.3s ease;
     }
 
-    .audio-player__play-btn:hover::before,
-    .audio-player__pause-btn:hover::before {
-      border-left: 16px solid #e2e2e2;
+    .audio-player.playing .audio-player__btn::before {
+      border-left: 16px solid #fff;
     }
 
-    .audio-player__play-btn.playing::before {
-      border-left: none;
-      border-top: 16px solid transparent;
-      border-bottom: 16px solid transparent;
-      border-right: 12px solid #e2e2e2;
-    }
-
-    .audio-player__pause-btn.paused::before {
+    .audio-player.paused .audio-player__btn::before {
       width: 8px;
       height: 20px;
-      background-color: #e2e2e2;
+      background-color: #fff;
     }
 
     .progress-bar {
@@ -132,28 +123,25 @@
     <h1>Venti's Concert</h1>
     <div class="audio-player">
       <audio id="audio" src="https://thetrueheavensequal.github.io/file/Impact.mp3"></audio>
-      <div class="audio-player__play-btn" id="playBtn"></div>
-      <div class="audio-player__pause-btn" id="pauseBtn"></div>
+      <div class="audio-player__btn"></div>
     </div>
+    <div class="progress-bar"></div>
   </div>
-  <div class="progress-bar"></div>
 
   <script>
-    const playBtn = document.getElementById('playBtn');
-    const pauseBtn = document.getElementById('pauseBtn');
+    const audioPlayer = document.querySelector('.audio-player');
+    const audioBtn = document.querySelector('.audio-player__btn');
     const audio = document.getElementById('audio');
     const progressBar = document.querySelector('.progress-bar');
 
-    playBtn.addEventListener('click', () => {
-      audio.play();
-      playBtn.classList.add('playing');
-      pauseBtn.classList.remove('paused');
-    });
-
-    pauseBtn.addEventListener('click', () => {
-      audio.pause();
-      pauseBtn.classList.add('paused');
-      playBtn.classList.remove('playing');
+    audioBtn.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play();
+        audioPlayer.classList.add('playing');
+      } else {
+        audio.pause();
+        audioPlayer.classList.remove('playing');
+      }
     });
 
     audio.addEventListener('timeupdate', () => {
