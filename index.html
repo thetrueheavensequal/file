@@ -30,7 +30,7 @@
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
       color: white;
       animation: fadein 2s;
-      margin-right: 40px;
+      margin-right: 10px;
     }
 
     @keyframes fadein {
@@ -60,7 +60,7 @@
     .audio-player__btn {
       width: 40px;
       height: 40px;
-      background-color: #fff;
+      background-color: teal;
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -71,7 +71,7 @@
     }
 
     .audio-player__btn:hover {
-      background-color: #f2f2f2;
+      background-color: #1a8a8a;
     }
 
     .audio-player__btn::before {
@@ -100,18 +100,16 @@
       width: 100%;
       height: 4px;
       background-color: goldenrod;
-      animation: progress-glow 2s linear infinite;
+      animation: progress-glow 4s linear infinite;
+      animation-play-state: paused;
     }
 
     @keyframes progress-glow {
       0% {
-        box-shadow: 0 0 5px 2px goldenrod;
-      }
-      50% {
-        box-shadow: 0 0 10px 4px goldenrod;
+        width: 0;
       }
       100% {
-        box-shadow: 0 0 5px 2px goldenrod;
+        width: 100%;
       }
     }
   </style>
@@ -138,9 +136,11 @@
       if (audio.paused) {
         audio.play();
         audioPlayer.classList.add('playing');
+        progressBar.style.animationPlayState = 'running';
       } else {
         audio.pause();
         audioPlayer.classList.remove('playing');
+        progressBar.style.animationPlayState = 'paused';
       }
     });
 
