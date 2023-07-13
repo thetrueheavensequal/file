@@ -30,7 +30,7 @@
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
       color: white;
       animation: fadein 2s;
-      margin-left: 50px;
+      margin-left: 10px;
     }
 
     @keyframes fadein {
@@ -51,6 +51,7 @@
       justify-content: center;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
       animation: flow 4s linear infinite;
+      outline: 2px solid white;
     }
 
     .audio-player audio {
@@ -60,7 +61,7 @@
     .audio-player__btn {
       width: 40px;
       height: 40px;
-      background-color: teal;
+      background-color: white;
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -71,7 +72,7 @@
     }
 
     .audio-player__btn:hover {
-      background-color: #1a8a8a;
+      background-color: #f2f2f2;
     }
 
     .audio-player__btn::before {
@@ -84,33 +85,32 @@
     }
 
     .audio-player.playing .audio-player__btn::before {
-      border-left: 16px solid #fff;
+      border-left: 16px solid teal;
     }
 
     .audio-player.paused .audio-player__btn::before {
       width: 8px;
       height: 20px;
-      background-color: #fff;
+      background-color: teal;
     }
 
     .progress-bar {
       position: absolute;
       bottom: 0;
       left: 0;
-      width: 100%;
+      width: 0;
       height: 4px;
       background-color: goldenrod;
-      animation: progress-glow 4s linear infinite;
-      animation-play-state: paused;
+      animation: progress-glow linear infinite;
     }
 
     @keyframes progress-glow {
-      0% {
-        width: 0;
-      }
-      100% {
-        width: 100%;
-      }
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    #audio {
+      width: 100%;
     }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&display=swap" rel="stylesheet">
