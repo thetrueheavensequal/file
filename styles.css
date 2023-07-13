@@ -1,0 +1,53 @@
+body {
+  background-color: #f2f2f2;
+}
+
+.music-player {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 100px;
+}
+
+.music-player h1 {
+  font-family: Arial, sans-serif;
+  color: #333333;
+  text-align: center;
+}
+
+.music-player-buttons {
+  margin-top: 20px;
+}
+
+.music-player-buttons button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+#musicPlayer {
+  display: none;
+}
+
+.music-player-animation {
+  width: 100px;
+  height: 100px;
+  background-color: #4CAF50;
+  border-radius: 50%;
+  animation: spin 2s linear infinite;
+  margin-top: 30px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
