@@ -27,7 +27,15 @@
         document.addEventListener('DOMContentLoaded', () => {
             const audio = new Audio('https://github.com/thetrueheavensequal/file/raw/main/summertime.mp3');
             audio.loop = true;
-            audio.autoplay = true;
+
+            const playAudio = () => {
+                audio.play();
+                document.removeEventListener('touchstart', playAudio);
+                document.removeEventListener('click', playAudio);
+            };
+
+            document.addEventListener('touchstart', playAudio);
+            document.addEventListener('click', playAudio);
         });
     </script>
 </head>
