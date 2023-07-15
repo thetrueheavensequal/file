@@ -26,9 +26,8 @@
 
         .play-pause {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            bottom: 10px;
+            left: 10px;
             width: 60px;
             height: 60px;
             background-color: blue;
@@ -71,6 +70,15 @@
         .playing::before {
             display: block;
         }
+
+        .play-pause img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 48px;
+            height: 48px;
+        }
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -100,7 +108,7 @@
 <body>
     <div class="title">
         NyxMoe
-        <div class="play-pause paused"></div>
+        <img src="https://raw.githubusercontent.com/thetrueheavensequal/file/main/pause-play.png" alt="play-pause icon" class="play-pause paused">
     </div>
 </body>
 </html>
