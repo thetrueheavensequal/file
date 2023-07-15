@@ -21,6 +21,55 @@
             font-size: 100px;
             font-weight: 400;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .play-pause {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background-color: blue;
+            border-radius: 50%;
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+        }
+
+        .play-pause::before,
+        .play-pause::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 18px;
+            height: 24px;
+            background-color: white;
+            border-radius: 2px;
+        }
+
+        .play-pause::before {
+            transform: translate(-30%, -50%);
+        }
+
+        .play-pause::after {
+            transform: translate(30%, -50%);
+        }
+
+        .paused::before,
+        .playing::after {
+            content: '';
+            display: none;
+        }
+
+        .paused::after {
+            display: block;
+        }
+
+        .playing::before {
+            display: block;
         }
     </style>
     <script>
@@ -28,20 +77,30 @@
             const audio = new Audio('https://github.com/thetrueheavensequal/file/raw/main/summertime.mp3');
             audio.loop = true;
 
-            const playAudio = () => {
-                audio.play();
-                document.removeEventListener('touchstart', playAudio);
-                document.removeEventListener('click', playAudio);
+            const playPauseButton = document.querySelector('.play-pause');
+            let isPlaying = false;
+
+            const togglePlayPause = () => {
+                if (isPlaying) {
+                    audio.pause();
+                    playPauseButton.classList.remove('playing');
+                    playPauseButton.classList.add('paused');
+                } else {
+                    audio.play();
+                    playPauseButton.classList.remove('paused');
+                    playPauseButton.classList.add('playing');
+                }
+                isPlaying = !isPlaying;
             };
 
-            document.addEventListener('touchstart', playAudio);
-            document.addEventListener('click', playAudio);
+            playPauseButton.addEventListener('click', togglePlayPause);
         });
     </script>
 </head>
 <body>
     <div class="title">
         NyxMoe
+        <div class="play-pause paused"></div>
     </div>
 </body>
 </html>
