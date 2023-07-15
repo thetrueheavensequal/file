@@ -28,56 +28,19 @@
             position: absolute;
             bottom: 10px;
             left: 10px;
-            width: 60px;
-            height: 60px;
-            background-color: blue;
-            border-radius: 50%;
-            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            width: 50px;
+            height: 50px;
+            background-image: url('https://raw.githubusercontent.com/thetrueheavensequal/file/main/pause-play.png');
+            background-size: cover;
             cursor: pointer;
         }
 
-        .play-pause::before,
-        .play-pause::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 18px;
-            height: 24px;
-            background-color: white;
-            border-radius: 2px;
+        .paused {
+            background-position: 0 0;
         }
 
-        .play-pause::before {
-            transform: translate(-30%, -50%);
-        }
-
-        .play-pause::after {
-            transform: translate(30%, -50%);
-        }
-
-        .paused::before,
-        .playing::after {
-            content: '';
-            display: none;
-        }
-
-        .paused::after {
-            display: block;
-        }
-
-        .playing::before {
-            display: block;
-        }
-
-        .play-pause img {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 48px;
-            height: 48px;
+        .playing {
+            background-position: -50px 0;
         }
     </style>
     <script>
@@ -108,7 +71,7 @@
 <body>
     <div class="title">
         NyxMoe
-        <img src="https://raw.githubusercontent.com/thetrueheavensequal/file/main/pause-play.png" alt="play-pause icon" class="play-pause paused">
+        <div class="play-pause paused"></div>
     </div>
 </body>
 </html>
