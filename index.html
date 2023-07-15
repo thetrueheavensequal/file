@@ -4,7 +4,7 @@
     <title>NyxMoe</title>
     <style>
         body {
-            background-image: url('https://raw.githubusercontent.com/thetrueheavensequal/file/main/minabackground.jpg');
+            background-image: url('https://raw.githubusercontent.com/thetrueheavensequal/file/main/miinabackground.jpg');
             background-size: 100% auto;
             background-repeat: no-repeat;
             display: flex;
@@ -29,21 +29,32 @@
             left: 10px;
             width: 50px;
             height: 50px;
-            background-image: url('https://raw.githubusercontent.com/thetrueheavensequal/file/main/white-ball.png');
-            background-size: cover;
-            cursor: pointer;
+            background-color: white;
             border-radius: 50%;
             box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
         }
 
-        .paused {
-            background-position: 0 0;
+        .play-pause-text {
+            font-family: 'Righteous', cursive;
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 5px;
         }
 
-        .playing {
-            background-position: 0 -50px;
+        .paused::after {
+            content: 'Play Music';
+        }
+
+        .playing::after {
+            content: 'Pause Music';
         }
     </style>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Righteous&display=swap">
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const audio = new Audio('https://github.com/thetrueheavensequal/file/raw/main/summertime.mp3');
@@ -73,6 +84,8 @@
     <div class="title">
         NyxMoe
     </div>
-    <div class="play-pause paused"></div>
+    <div class="play-pause paused">
+        <span class="play-pause-text"></span>
+    </div>
 </body>
 </html>
